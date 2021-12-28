@@ -2,6 +2,12 @@ include "../node_modules/circomlib/circuits/bitify.circom";
 include "../node_modules/circomlib/circuits/pedersen.circom";
 include "merkleTree.circom";
 
+// [amiller] This is the same as the ordinary tornado.cash withdraw circuit,
+//  the only change is that instead of "nullifierHash", the "airdropifierHash"
+//  is offset by 200-bits, so it uses different base elements.
+//     If the nullifier hash was g1^x g2^y,
+//     The new one is g1^0 g2^x g3^y.
+//
 // computes Pedersen(nullifier + secret)
 template CommitmentHasherAirdrop() {
     signal input nullifier;
